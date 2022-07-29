@@ -9,8 +9,8 @@ using SallesWebMvc.Data;
 namespace SallesWebMvc.Migrations
 {
     [DbContext(typeof(SallesWebMvcContext))]
-    [Migration("20220729230257_OtherEntities")]
-    partial class OtherEntities
+    [Migration("20220729220625_UpDatabase")]
+    partial class UpDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,7 +60,7 @@ namespace SallesWebMvc.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
-                    b.Property<int?>("DepartmentId");
+                    b.Property<int>("DepartmentId");
 
                     b.Property<string>("Email");
 
@@ -84,7 +84,8 @@ namespace SallesWebMvc.Migrations
                 {
                     b.HasOne("SallesWebMvc.Models.Department", "Department")
                         .WithMany("Sellers")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

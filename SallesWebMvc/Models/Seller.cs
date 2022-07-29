@@ -12,6 +12,7 @@ namespace SallesWebMvc.Models
         public DateTime BirthDate { get; set; }
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
+        public int DepartmentId { get; set; } // Ao declarar desta forma garante-se a integridade referencial, ou seja o campo de associação nao pode ser nulo
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
 
         public Seller()
