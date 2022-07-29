@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SallesWebMvc.Models
 {
@@ -25,6 +26,25 @@ namespace SallesWebMvc.Models
             BirthDate = birthDate;
             BaseSalary = baseSalary;
             Department = department;
+        }
+
+        public void AddSales(SalesRecord sr)
+        {
+            Sales.Add(sr);
+        }
+
+        public void RemoveSales(SalesRecord sr)
+        {
+            Sales.Remove(sr);
+        }
+
+        public double TotalSales(DateTime initial, DateTime final)
+        {
+            //return Sales.Where(sr => sr.Date >= initial && sr.Date <= final).Sum(sr => sr.Amount);
+
+            return (from sale in Sales
+                    where sale.Date >= initial && sale.Date <= final
+                    select sale.Amount).DefaultIfEmpty(0.00).Sum();
         }
     }
 }

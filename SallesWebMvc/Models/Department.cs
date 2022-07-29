@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SallesWebMvc.Models
 {
@@ -16,6 +18,18 @@ namespace SallesWebMvc.Models
         {
             Id = id;
             Name = name;
+        }
+
+        public void AddSeller(Seller seller)
+        {
+            Sellers.Add(seller);
+        }
+
+        public double TotalSales(DateTime initial, DateTime final)
+        {
+            //return Sellers.Sum(seller => seller.TotalSales(initial, final));
+            return (from seller in Sellers
+                    select seller.TotalSales(initial, final)).DefaultIfEmpty(0.00).Sum();
         }
     }
 }
